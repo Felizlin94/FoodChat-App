@@ -1,7 +1,6 @@
 import styles from "./LoginPage.module.scss";
-
 // SVG檔案
-import foodchatLOGO from "../../assets/icons/foodchat_LOGO_yellow.svg";
+import foodchatLOGO from "../../assets/icons/foodchat_LOGO_bread.svg";
 import logoGoogle from "../../assets/icons/Logo_Google.svg";
 import logoInstagram from "../../assets/icons/Logo_Instagram.svg";
 
@@ -9,11 +8,20 @@ import logoInstagram from "../../assets/icons/Logo_Instagram.svg";
 import { GoogleLogin } from "@react-oauth/google";
 
 function LoginPage() {
+
   return (
     <div className={styles.container}>
-          <img className={styles.foodchatLOGO} src={foodchatLOGO} alt="foodchatLOGO" />
+      <img
+        className={styles.foodchatLOGO}
+        src={foodchatLOGO}
+        alt="foodchatLOGO"
+      />
       <GoogleLoginArea />
-      <InstagramLoginArea />
+      {/* <InstagramLoginArea /> */}
+      <div className={styles.toDefined}>
+       
+      </div>
+
       <VisitorNav />
     </div>
   );
