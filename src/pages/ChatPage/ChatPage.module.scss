@@ -1,3 +1,141 @@
-.chat {
-  background-color: rgb(238, 227, 191);
+.container {
+  .friendList {
+    .infoCard {
+    }
+  }
+
+  .chatroom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .avatarAndName {
+      display: flex;
+      flex-direction: column;
+      height: 125px;
+      border-bottom: 1px solid sienna;
+      justify-content: center;
+      align-items: center;
+      width: 320px;
+
+      .backArrow {
+        height: 10px;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+      .avatar {
+        width: 75px;
+        height: 75px;
+        background-color: rgb(212, 212, 212);
+        border-radius: 50%;
+      }
+      .name {
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 3px;
+        color: rgb(224, 144, 46);
+      }
+    }
+    
+    .chatArea::-webkit-scrollbar {
+      display: none;
+      /* Chrome, Safari, Opera */
+    }
+
+    .chatArea {
+      width: 360px;
+      height: 570px;
+      margin-top: 16px;
+      font-size: 16px;
+      overflow: scroll;
+      overflow-x: hidden;
+      -ms-overflow-style: none; /* Edge, Internet Explorer */
+      scrollbar-width: none; /* Firefox */
+
+      .selfMessage {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+
+        .message {
+          width: fit-content;
+          padding: 2px 8px 5px 8px;
+          border-radius: 5px;
+          border: 0.5px solid rgb(237, 209, 119);
+          background-color: rgb(255, 255, 255);
+        }
+        .sentTime {
+          color: gray;
+          font-size: 12px;
+          margin-right: 3px;
+          margin-top: 3px;
+        }
+      }
+
+      .friendMessage {
+        display: flex;
+        align-items: start;
+
+        .avatar {
+          width: 36px;
+          height: 36px;
+          background-color: rgb(243, 174, 173);
+          border-radius: 50%;
+        }
+
+        .messageAndTime {
+          margin: 3px 0 0 10px;
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+
+          .message {
+            background-color: rgb(255, 230, 230);
+            width: fit-content;
+            padding: 2px 8px 5px 8px;
+            border-radius: 5px;
+            border: 0.5px solid rgb(237, 209, 119);
+          }
+
+          .sentTime {
+            color: gray;
+            font-size: 12px;
+            margin-left: 3px;
+            margin-top: 3px;
+          }
+        }
+      }
+    }
+
+    .launchArea {
+      background-color: rgb(255, 255, 255);
+      border: 1px solid rgb(255, 242, 0);
+      margin-top: 20px;
+      height: 60px;
+      width: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      input {
+        margin: auto 10px;
+        width: 240px;
+        height: 30px;
+      }
+      .sendMessage {
+        margin-right: 7px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .container {
+    .friendList {
+    }
+
+    .chatroom {
+    }
+  }
 }

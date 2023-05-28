@@ -32,12 +32,12 @@
         text-align: end;
         margin-top: 2px;
 
-      p{
-        text-align: end;
-        margin-right: 10px;
-        margin-top: 10px;
-        font-size: 15px;
-      }
+        p {
+          text-align: end;
+          margin-right: 10px;
+          margin-top: 10px;
+          font-size: 15px;
+        }
       }
 
       .tags {
@@ -138,6 +138,41 @@
       }
     }
   }
+  .readyToChatArea {
+    border: 1px solid blue;
+    width: 360px;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .toChatRoom {
+      height: 180px;
+      width: 180px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      border: rgb(243, 223, 168) solid 3px;
+      background: #C2DCE2;
+      margin: 98px 90px;
+
+      img {
+        width: 97.8px;
+          height: 91.8px;
+      }
+    }
+
+    .changeTagsBtn {
+      margin-bottom: 20px;
+      padding-bottom: 5px;
+      font-size: 20px;
+      width: 250px;
+      border: 0.5px solid rgb(213, 193, 139);
+          border-radius: 3px;
+      border-bottom: 0;
+    }
+  }
 }
 
 @media screen and (min-width: 1280px) {
@@ -151,14 +186,12 @@
       min-height: 600px;
 
       .selectedTags {
-
         .texts {
           font-size: 21px;
 
-            p {
-
-                font-size: 17px;
-              }
+          p {
+            font-size: 17px;
+          }
         }
 
         .tags {
@@ -170,7 +203,7 @@
     .choosingArea {
       border: 1px solid blue;
       width: 960px;
-      min-height: 600px;
+      height: 600px;
 
       .topArea {
         font-size: 21px;
@@ -219,6 +252,26 @@
             font-size: 18.5px;
           }
         }
+      }
+    }
+
+    .readyToChatArea {
+      width: 960px;
+      height: 600px;
+
+      .toChatRoom {
+        height: 542px;
+          width: 225px;
+          height: 225px;
+margin: auto;
+
+        img {
+          width: 225px;
+        }
+      }
+
+      .changeTagsBtn {
+          border-radius: 5px;
       }
     }
   }

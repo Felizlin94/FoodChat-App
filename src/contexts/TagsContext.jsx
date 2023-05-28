@@ -3,16 +3,8 @@
 import foodchatLOGO from "../assets/icons/foodchat_LOGO_blue.svg";
 
 const citySelected = [];
-// const citySelected = ["Taipei", "New Taipei", "Taichung", "Tainan", "Hualien"];
 
 const cuisineSelected = [];
-// const cuisineSelected = [
-//   "Café & desserts",
-//   "Breakfast & brunch",
-//   "Japanese Food",
-//   "Japanese Food",
-//   "Japanese Food",
-// ];
 
 const cityTags = [
   {
