@@ -12,7 +12,7 @@ import {
   cuisineTags,
 } from "../../contexts/TagsContext";
 
-function MainPage() {
+function MainPage({ onToChatPage }) {
   const [stepState, setStepState] = useState("city");
   const [isPreviousAvailable, setIsPreviousAvailable] = useState(false);
   const [tagsData, setTagsData] = useState(cityTags);
@@ -33,7 +33,7 @@ function MainPage() {
     return <div key={index}>{cuisine}</div>;
   });
 
-// ChoosingArea related
+  // ChoosingArea related
   // UI: 可選擇的tags list
   const tagList = tagsData.map((topic, index) => {
     return (
@@ -111,10 +111,10 @@ function MainPage() {
     /////////////////////////// 被點擊後新增暗幕
   };
 
-////////Ready to chat related
-function handleToChangeTagClick(){
-     setStepState("cuisine");
-}
+  ////////Ready to chat related
+  function handleToChangeTagClick() {
+    setStepState("cuisine");
+  }
 
   return (
     <div className={styles.container}>
@@ -125,7 +125,10 @@ function handleToChangeTagClick(){
         cuisineTagCount={cuisineTagCount}
       />
       {stepState === "readyToChat" ? (
-        <ReadyToChat onClick={handleToChangeTagClick} />
+        <ReadyToChat
+          onToChatPage={onToChatPage}
+          onToChangeTagClick={handleToChangeTagClick}
+        />
       ) : (
         <ChoosingArea
           dataList={tagList}
@@ -201,13 +204,15 @@ function SelectedTags({ title, tagSource, tagCount }) {
   );
 }
 
-function ReadyToChat({onClick}) {
+function ReadyToChat({ onToChatPage, onToChangeTagClick }) {
   return (
     <div className={styles.readyToChatArea}>
-      <div className={styles.toChatRoom}>
+      <div className={styles.toChatRoom} onClick={onToChatPage}>
         <img src={iconChatCat} alt="button" />
       </div>
-      <div className={styles.changeTagsBtn} onClick={onClick} >Click here to change tags</div>
+      <div className={styles.changeTagsBtn} onClick={onToChangeTagClick}>
+        Click here to change tags
+      </div>
     </div>
   );
 }

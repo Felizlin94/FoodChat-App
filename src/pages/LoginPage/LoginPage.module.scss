@@ -6,10 +6,10 @@
   height: 100%;
   padding-top: 200px;
 
-  .foodchatLOGO{
+  .foodchatLOGO {
     position: absolute;
-    top: 30px;
-    height:  100px;
+    top: 46px;
+    height: 100px;
     border-radius: 10px;
   }
 
@@ -62,15 +62,111 @@
       }
     }
   }
+  .loginArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  .visitorNav {
-    margin-top: 160px;
-    font-size: 13px;
-    text-decoration: underline;
-    padding-bottom: 36px;
+    .inputInfo {
+      margin: 5px 20px 5px auto;
+      height: 36px;
+      color: #a06d21;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+
+      input {
+        width: 160px;
+        height: 24px;
+        margin-left: 10px;
+      }
+    }
+
+    .loginBtn {
+      width: 125px;
+      height: 48px;
+      font-size: 17px;
+      font-weight: 500;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 16px;
+      margin-bottom: 70px;
+      border-radius: 3px;
+      background-color: #f5eaea;
+      color: #ed8f5c;
+      border: 1px #ba8636 solid;
+      box-shadow: 0 8px #d1c0c0;
+    }
+    .loginBtn:hover {
+      background-color: #f7e4e4;
+      cursor: pointer;
+    }
+    .loginBtn:active {
+      background-color: #f7e4e4;
+      box-shadow: 0 3px #d1c0c0;
+      transform: translateY(5px);
+    }
   }
-  .visitorNav:hover {
-    color: #bd5a5a;
+  .createAccountArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .createAccountBtn {
+      width: 260px;
+      height: 48px;
+      font-size: 17px;
+      font-weight: 500;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+      border-radius: 3px;
+      color: #e8a6a6;
+    }
+    .createAccountBtn:hover {
+      color: #bd5a5a;
+      cursor: pointer;
+    }
+    .createUserInfo {
+      border: 2px #a06d21 dotted;
+      border-radius: 3px;
+      width: 320px;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: end;
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      div {
+        margin: 5px 20px 3px auto;
+        height: 36px;
+        color: #a06d21;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.2px;
+
+        input {
+          width: 150px;
+          height: 24px;
+          margin-left: 5px;
+        }
+      }
+
+      button {
+        margin-top: 10px;
+        margin-right: 90px;
+        width: 140px;
+        height: 30px;
+        background: rgb(237, 220, 194);
+        font-weight: 500;
+        font-size: 16px;
+        color: #50350e;
+      }
+    }
   }
 }
 
@@ -92,7 +188,11 @@
         }
       }
     }
-    .visitorNav {
+
+    .loginBtn {
+    }
+
+    .createAccountBtn {
       font-size: 16px;
     }
   }
