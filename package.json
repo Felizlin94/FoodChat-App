@@ -1,7 +1,7 @@
 {
   "name": "foodchat",
   "version": "0.1.0",
-  "homepage": "https://Felizlin94.github.io/foodchat",
+  "homepage": "https://Felizlin94.github.io/FoodChat",
   "private": true,
   "dependencies": {
     "@react-oauth/google": "^0.11.0",
@@ -48,6 +48,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^5.0.0"
+    "gh-pages": "^4.0.0"
   }
 }
