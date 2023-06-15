@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import MainPage from "./pages/MainPage/MainPage.jsx";
 import ChatPage from "./pages/ChatPage/ChatPage";
 import { UserContext, userAccounts } from "./contexts/UserContext";
+import { io } from "socket.io-client";
 
 // Sign In With Google
 // import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -24,7 +25,6 @@ function App() {
 
   function handleToChatPage() {
     setPage("chatPage");
-    console.log("currentAccount:", currentAccount);
   }
 
   ///////////// Login related functions  /////////////

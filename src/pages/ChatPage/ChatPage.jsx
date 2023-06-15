@@ -41,9 +41,8 @@ function FriendList() {
 function Chatroom({ currentAccount, onBackArrowClick }) {
   const [newMessage, setNewMessage] = useState("");
   const [messageBase, setMessageBase] = useState([]);
-  // const [isSocketConnected, setIsSocketConnected] = useState(false);
   const socket = io("http://localhost:3001");
-  // ,{  autoConnect: false}
+  // const socket = io("http://localhost:3001", { autoConnect: false });
 
   async function fetchMessages() {
     try {
@@ -56,6 +55,8 @@ function Chatroom({ currentAccount, onBackArrowClick }) {
   }
 
   useEffect(() => {
+    socket.connect();
+
     socket.on("connect", () => {
       console.log("Connected to Socket.io server");
     });
@@ -67,11 +68,11 @@ function Chatroom({ currentAccount, onBackArrowClick }) {
       console.log("Disconnected from Socket.io server");
     });
 
-    const handleReceivedMessage = (receivedMessagePack) => {
-      setMessageBase((prevPacks) => [...prevPacks, receivedMessagePack]);
+    const receiveMessage = (receivedMessagePack) => {
+      setMessageBase((prev) => [...prev, receivedMessagePack]);
     };
 
-    socket.on("message", handleReceivedMessage);
+    socket.on("message", receiveMessage);
 
     return () => {
       socket.disconnect();
@@ -94,28 +95,17 @@ function Chatroom({ currentAccount, onBackArrowClick }) {
 
   function handleSendMessage() {
     if (newMessage) {
-      setMessageBase([...messageBase, messagePack]);
       socket.emit("message", messagePack);
       setNewMessage("");
     }
   }
-
-  // const connectSocket = () => {
-  //   socket.connect();
-  //   setIsSocketConnected(true);
-  // };
-
-  // const disconnectSocket = () => {
-  //   socket.disconnect();
-  //   setIsSocketConnected(false);
-  // };
 
   return (
     <div className={styles.chatroom}>
       <AvatarAndName onBackArrowClick={onBackArrowClick} />
       <div className={styles.chatArea}>
         {messageBase.map((messages, index) =>
-          messageBase.username === currentAccount.Username ? (
+          messages.username === currentAccount.Username ? (
             <SelfMessage key={index} postNewMessage={messages.text} />
           ) : (
             <FriendMessage key={index} postNewMessage={messages.text} />
@@ -128,11 +118,6 @@ function Chatroom({ currentAccount, onBackArrowClick }) {
         onSendMessage={handleSendMessage}
         onKeyDown={handleKeyPress}
       />
-      {/* {isSocketConnected ? (
-        <button onClick={disconnectSocket}>Disconnect</button>
-      ) : (
-        <button onClick={connectSocket}>Connect</button>
-      )} */}
     </div>
   );
 }

@@ -24,17 +24,15 @@ function MainPage({ onToChatPage }) {
   );
 
   // CurrentTagsArea related
-  // UI: 當前的city tags
   const currentCityTags = selectedCity.map((city, index) => {
     return <div key={index}>{city}</div>;
   });
-  // UI: 當前的cusine tags
   const currentCuisineTags = selectedCuisine.map((cuisine, index) => {
     return <div key={index}>{cuisine}</div>;
   });
 
   // ChoosingArea related
-  // UI: 可選擇的tags list
+  // 使用者可選擇的tagList
   const tagList = tagsData.map((topic, index) => {
     return (
       <div
