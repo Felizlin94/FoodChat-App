@@ -25,18 +25,18 @@ function ChatPage({ onChangePage }) {
   );
 }
 
-function FriendList() {
-  const currentUser = useContext(UserContext);
+// function FriendList() {
+//   const currentUser = useContext(UserContext);
 
-  // const usersname = "To Write";
+//   // const usersname = "To Write";
 
-  return (
-    <div className={styles.friendList}>
-      I'm {currentUser}
-      {/* <InfoCard users={usersname} /> */}
-    </div>
-  );
-}
+//   return (
+//     <div className={styles.friendList}>
+//       I'm {currentUser}
+//       {/* <InfoCard users={usersname} /> */}
+//     </div>
+//   );
+// }
 
 function Chatroom({ currentAccount, onBackArrowClick }) {
   const [newMessage, setNewMessage] = useState("");
