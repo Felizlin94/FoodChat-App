@@ -5,29 +5,28 @@ import arrowNext from "../../assets/icons/arrow_next.svg";
 import iconChatCat from "../../assets/icons/Icon_chatCat.svg";
 
 import { useState } from "react";
-import {
-  citySelected,
-  cuisineSelected,
-  cityTags,
-  cuisineTags,
-} from "../../contexts/TagsContext";
+import { cityTags, cuisineTags } from "../../contexts/TagsContext";
 
-function MainPage({ onToChatPage }) {
+function MainPage({
+  onToChatPage,
+  selectedCity,
+  setSelectedCity,
+  selectedCuisine,
+  setSelectedCuisine,
+}) {
   const [stepState, setStepState] = useState("city");
   const [isPreviousAvailable, setIsPreviousAvailable] = useState(false);
   const [tagsData, setTagsData] = useState(cityTags);
-  const [selectedCity, setSelectedCity] = useState(citySelected);
-  const [selectedCuisine, setSelectedCuisine] = useState(cuisineSelected);
-  const [cityTagCount, setCityTagCount] = useState(citySelected.length);
+  const [cityTagCount, setCityTagCount] = useState(selectedCity?.length);
   const [cuisineTagCount, setCuisineTagCount] = useState(
-    cuisineSelected.length
+    selectedCuisine?.length
   );
 
   // CurrentTagsArea related
-  const currentCityTags = selectedCity.map((city, index) => {
+  const currentCityTags = selectedCity?.map((city, index) => {
     return <div key={index}>{city}</div>;
   });
-  const currentCuisineTags = selectedCuisine.map((cuisine, index) => {
+  const currentCuisineTags = selectedCuisine?.map((cuisine, index) => {
     return <div key={index}>{cuisine}</div>;
   });
 
@@ -67,9 +66,11 @@ function MainPage({ onToChatPage }) {
     // Step: 挑選city tags
     if (stepState === "city") {
       // 能將已選擇的city tag移除
-      const isCitySelected = selectedCity.includes(tagClicked);
+      const isCitySelected = selectedCity?.includes(tagClicked);
       if (isCitySelected === true) {
-        const citySelected = selectedCity.filter((item) => item !== tagClicked);
+        const citySelected = selectedCity?.filter(
+          (item) => item !== tagClicked
+        );
         setSelectedCity(citySelected);
         setCityTagCount(citySelected.length);
       } else {
@@ -80,16 +81,17 @@ function MainPage({ onToChatPage }) {
           // 能新增未選擇的city
           const cities = [...selectedCity, tagClicked];
           setSelectedCity(cities);
-          setCityTagCount(cities.length);
+          setCityTagCount(cities?.length);
+          console.log("selectedCity", selectedCity);
         }
       }
 
       // Step: 挑選cuisine tags
     } else if (stepState === "cuisine") {
       // 能將已選擇的cuisine tag移除
-      const isCuisineSelected = selectedCuisine.includes(tagClicked);
+      const isCuisineSelected = selectedCuisine?.includes(tagClicked);
       if (isCuisineSelected === true) {
-        const cuisineSelected = selectedCuisine.filter(
+        const cuisineSelected = selectedCuisine?.filter(
           (item) => item !== tagClicked
         );
         setSelectedCuisine(cuisineSelected);
@@ -101,7 +103,7 @@ function MainPage({ onToChatPage }) {
         } else {
           const cuisineSelected = [...selectedCuisine, tagClicked];
           setSelectedCuisine(cuisineSelected);
-          setCuisineTagCount(cuisineSelected.length);
+          setCuisineTagCount(cuisineSelected?.length);
         }
       }
     }

@@ -1,14 +1,50 @@
 import { createContext } from "react";
 
 const userAccounts = [
-  { Id: 1, Username: "Snoopy", Password: "puppy" },
-  { Id: 2, Username: "Anya", Password: "peanuts" },
-  { Id: 3, Username: "Nohara", Password: "shiro" },
-  { Id: 4, Username: "1", Password: "23" },
+  {
+    Id: 1,
+    Username: "Snoopy",
+    Password: "puppy",
+    Info: {
+      gender: "boy",
+      age: "18",
+      MBTI: "ENTJ",
+      aboutMe:
+        "Oh hey! I just wanna know how you doin now? Before we hung everything were like a sign. From you weren’t they oh why can’t I get off u?",
+      citySelected: [],
+      cuisineSelected: [],
+    },
+  },
+  {
+    Id: 2,
+    Username: "Anya",
+    Password: "peanuts",
+    Info: {
+      gender: "girl",
+      age: "6",
+      MBTI: "INFP",
+      aboutMe:
+        "We were both young when I first saw you. I close my eyes, and the flashback starts I'm standing there. On a balcony in summer air.",
+      citySelected: ["Taipei", "Keelung"],
+      cuisineSelected: ["Café & desserts"],
+    },
+  },
+  {
+    Id: 3,
+    Username: "Qoo",
+    Password: "123",
+    Info: {
+      gender: "boy",
+      age: "5",
+      MBTI: "ESFJ",
+      aboutMe:
+        "蘭陵美酒鬱金香，玉碗盛來琥珀光。但使主人能醉客，不知何處是他鄉。朱雀橋邊野草花，烏衣巷口夕陽斜。舊時王謝堂前燕，飛入尋常百姓家。",
+      citySelected: [],
+      cuisineSelected: [],
+    },
+  },
 ];
-
-const currentUser = "";
 
 const UserContext = createContext("");
 
-export { userAccounts, currentUser, UserContext };
+export { userAccounts, UserContext };

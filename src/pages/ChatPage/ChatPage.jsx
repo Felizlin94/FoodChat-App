@@ -8,7 +8,7 @@ import iconSendMessage from "../../assets/icons/sendMessage.svg";
 import addEmoji from "../../assets/icons/addEmoji.svg";
 
 import io from "socket.io-client";
-import { UserContext } from "../../contexts/UserContext";
+import { UserContext, userAccounts } from "../../contexts/UserContext";
 
 function ChatPage({ onChangePage }) {
   const currentUser = useContext(UserContext);
@@ -16,7 +16,7 @@ function ChatPage({ onChangePage }) {
 
   return (
     <div className={styles.container}>
-      {/* <FriendList /> */}
+      <FriendList currentAccount={currentAccount} userAccounts={userAccounts} />
       <Chatroom
         currentAccount={currentAccount}
         onBackArrowClick={onChangePage}
@@ -25,18 +25,18 @@ function ChatPage({ onChangePage }) {
   );
 }
 
-// function FriendList() {
-//   const currentUser = useContext(UserContext);
+function FriendList({ currentAccount, userAccounts, onViewProfile }) {
+  const friendNumber = userAccounts.length - 1;
 
-//   // const usersname = "To Write";
-
-//   return (
-//     <div className={styles.friendList}>
-//       I'm {currentUser}
-//       {/* <InfoCard users={usersname} /> */}
-//     </div>
-//   );
-// }
+  return (
+    <div className={styles.friendList}>
+      <p> Hi! {currentAccount.Username}</p>
+      <p>You have {friendNumber} friends</p>
+      <button onClick={onViewProfile}>View profiles</button>
+      <InfoCard user={userAccounts[1]} />
+    </div>
+  );
+}
 
 function Chatroom({ currentAccount, onBackArrowClick }) {
   const [newMessage, setNewMessage] = useState("");
@@ -123,10 +123,17 @@ function Chatroom({ currentAccount, onBackArrowClick }) {
 }
 
 // FriendList related components
-function InfoCard({ users }) {
+function InfoCard({ user }) {
   return (
     <>
-      <div className={styles.infoCard}>{users}</div>;
+      <div className={styles.infoCard}>
+        <div className={styles.info}>{user.Username}</div>
+        <div className={styles.aboutMe}>{user.Info.aboutMe}</div>
+        <div className={styles.pickedTags}>
+          {user.Info.citySelected}
+          {user.Info.cuisineSelected}
+        </div>
+      </div>
     </>
   );
 }

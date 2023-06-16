@@ -5,14 +5,20 @@ import MainPage from "./pages/MainPage/MainPage.jsx";
 import ChatPage from "./pages/ChatPage/ChatPage";
 import { UserContext, userAccounts } from "./contexts/UserContext";
 
-// Sign In With Google
-// import { GoogleOAuthProvider } from "@react-oauth/google";
-
 function App() {
+  const user = userAccounts.find((account) => account.Username === "Anya");
   const [page, setPage] = useState("loginPage");
-  const [currentAccount, setCurrentAccount] = useState("");
+  const [currentAccount, setCurrentAccount] = useState(user);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  // const citySelected = currentAccount.Info.citySelected;
+  // const cuisineSelected = currentAccount.Info.cuisineSelected;
+  const [selectedCity, setSelectedCity] = useState([]);
+  const [selectedCuisine, setSelectedCuisine] = useState([]);
+
+  console.log("selectedCity", selectedCity);
+  console.log("currentAccount", currentAccount);
 
   function handleToLoginPage() {
     setPage("loginPage");
@@ -45,6 +51,8 @@ function App() {
 
     if (findMeetPasswordAccount.length !== 0) {
       setCurrentAccount(findMeetPasswordAccount[0]);
+      setSelectedCity(currentAccount.Info.citySelected);
+      setSelectedCuisine(currentAccount.Info.cuisineSelected);
       console.log(
         "Login Success, Welcome",
         findMeetPasswordAccount[0].Username
@@ -64,11 +72,11 @@ function App() {
   // };
 
   return (
-    // <GoogleOAuthProvider clientId="783354130612-3gp8k8fhg8povfqqh9jf09s8rio6bg6m.apps.googleusercontent.com">
     <UserContext.Provider value={{ currentAccount }}>
       <div className="App">
         <button onClick={handleToChatPage}>ToChatPage</button>
         <button onClick={handleToLoginPage}>ToLoginPage</button>
+        <button onClick={handleToMainPage}>ToMainPage</button>
 
         {page === "loginPage" && (
           <LoginPage
@@ -79,11 +87,18 @@ function App() {
             onPasswordChange={handlePasswordChange}
           />
         )}
-        {page === "mainPage" && <MainPage onToChatPage={handleToChatPage} />}
+        {page === "mainPage" && (
+          <MainPage
+            onToChatPage={handleToChatPage}
+            selectedCity={selectedCity}
+            setSelectedCity={setSelectedCity}
+            selectedCuisine={selectedCuisine}
+            setSelectedCuisine={setSelectedCuisine}
+          />
+        )}
         {page === "chatPage" && <ChatPage onChangePage={handleToMainPage} />}
       </div>
     </UserContext.Provider>
-    // </GoogleOAuthProvider> >
   );
 }
 

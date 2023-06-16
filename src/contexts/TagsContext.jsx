@@ -1,10 +1,11 @@
 // import { createContext } from 'react';
 
+// import { createContext } from "react";
 import foodchatLOGO from "../assets/icons/foodchat_LOGO_blue.svg";
 
-const citySelected = [];
+// const citySelected = [];
 
-const cuisineSelected = [];
+// const cuisineSelected = [];
 
 const cityTags = [
   {
@@ -104,7 +105,6 @@ const cuisineTags = [
   },
 ];
 
-// Context還沒有可使用的地方
-export { citySelected, cuisineSelected, cityTags, cuisineTags };
+export { cityTags, cuisineTags };
 
 // const tagsContext = createContext([cityTags]);
