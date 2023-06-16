@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/FoodChat/static/css/main.f854c65e.css",
+    "main.js": "/FoodChat/static/js/main.01c95b06.js",
+    "static/js/787.6626d448.chunk.js": "/FoodChat/static/js/787.6626d448.chunk.js",
+    "static/media/foodchat_LOGO_blue.svg": "/FoodChat/static/media/foodchat_LOGO_blue.6f9a4ca3f4e15cc20384dd8675e7ab78.svg",
+    "static/media/foodchat_LOGO_bread.svg": "/FoodChat/static/media/foodchat_LOGO_bread.e76a25373c616e5feccfaee96f9632fc.svg",
+    "static/media/Icon_chatCat.svg": "/FoodChat/static/media/Icon_chatCat.63970e883aa06e2c4797fe97a928fe7b.svg",
+    "index.html": "/FoodChat/index.html",
+    "static/media/addImage.svg": "/FoodChat/static/media/addImage.68b7a40d6e24dc58cf748b4c18165af8.svg",
+    "static/media/sendMessage.svg": "/FoodChat/static/media/sendMessage.4fce4049b36b325223435f8bdade4a00.svg",
+    "static/media/addEmoji.svg": "/FoodChat/static/media/addEmoji.6ebbf10f39f77f3050e541ad8a358f2f.svg",
+    "static/media/backArrow_chatroom.svg": "/FoodChat/static/media/backArrow_chatroom.2d8f61e51a57ffca034227e816d5c537.svg",
+    "static/media/arrow_next.svg": "/FoodChat/static/media/arrow_next.ccc243cc97db550f32f8d7cae75ff169.svg",
+    "static/media/arrow_previous.svg": "/FoodChat/static/media/arrow_previous.ac83a12a8ba0b7d63ee2a0ba600427cb.svg",
+    "main.f854c65e.css.map": "/FoodChat/static/css/main.f854c65e.css.map",
+    "main.01c95b06.js.map": "/FoodChat/static/js/main.01c95b06.js.map",
+    "787.6626d448.chunk.js.map": "/FoodChat/static/js/787.6626d448.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f854c65e.css",
+    "static/js/main.01c95b06.js"
+  ]
+}
