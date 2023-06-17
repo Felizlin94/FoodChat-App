@@ -3,6 +3,8 @@ import styles from "./ChatPage.module.scss";
 
 import iconChatCat from "../../assets/icons/Icon_chatCat.svg";
 import backArrow from "../../assets/icons/backArrow_chatroom.svg";
+import genderBoy from "../../assets/icons/gender_boy.svg";
+import genderGirl from "../../assets/icons/gender_girl.svg";
 import addImage from "../../assets/icons/addImage.svg";
 import iconSendMessage from "../../assets/icons/sendMessage.svg";
 import addEmoji from "../../assets/icons/addEmoji.svg";
@@ -16,7 +18,7 @@ function ChatPage({ onChangePage }) {
 
   return (
     <div className={styles.container}>
-      <FriendList currentAccount={currentAccount} userAccounts={userAccounts} />
+      <FriendList currentAccount={currentAccount} />
       <Chatroom
         currentAccount={currentAccount}
         onBackArrowClick={onChangePage}
@@ -25,16 +27,68 @@ function ChatPage({ onChangePage }) {
   );
 }
 
-function FriendList({ currentAccount, userAccounts, onViewProfile }) {
+function FriendList({ currentAccount, onViewProfile }) {
   const friendNumber = userAccounts.length - 1;
+  const [profileVisible, setProfileVisible] = useState(false);
+
+  function handleViewProfile() {
+    setProfileVisible(!profileVisible);
+  }
 
   return (
     <div className={styles.friendList}>
-      <p> Hi! {currentAccount.Username}</p>
-      <p>You have {friendNumber} friends</p>
-      <button onClick={onViewProfile}>View profiles</button>
-      <InfoCard user={userAccounts[1]} />
+      <span> Hi! {currentAccount.Username}</span>
+      <span>You have {friendNumber} friends</span>
+      <button onClick={handleViewProfile}>
+        {profileVisible ? "Hide profiles" : "View profiles"}
+      </button>
+      {profileVisible &&
+        userAccounts
+          .filter((user) => user.Id !== currentAccount.Id)
+          .map((user) => <InfoCard key={user.Id} user={user} />)}
     </div>
+  );
+}
+
+// FriendList related component
+function InfoCard({ user }) {
+  return (
+    <>
+      <div className={styles.infoCard}>
+        <div className={styles.info}>
+          {user.Username}
+          <div className={styles.moreInfo}>
+            <img
+              src={user.Info.gender === "girl" ? genderGirl : genderBoy}
+              alt="gender"
+            />
+            <span>{user.Info.age},</span>
+            <span>{user.Info.MBTI}</span>
+          </div>
+        </div>
+        <div className={styles.aboutMe}>{user.Info.aboutMe}</div>
+        <div className={styles.pickedTags}>
+          <div className={styles.cityTags}>
+            {user.Info.citySelected.map((city, index) => {
+              return (
+                <div className={styles.tag} key={index}>
+                  {city}
+                </div>
+              );
+            })}
+          </div>
+          <div className={styles.cuisineTags}>
+            {user.Info.cuisineSelected.map((cuisine, index) => {
+              return (
+                <div className={styles.tag} key={index}>
+                  {cuisine}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -86,11 +140,19 @@ function Chatroom({ currentAccount, onBackArrowClick }) {
     }
   };
 
+  const getCurrentTime = () => {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, "0");
+    const minutes = now.getMinutes().toString().padStart(2, "0");
+    return `${hours}:${minutes}`;
+  };
+
   const messagePack = {
     text: newMessage,
     username: currentAccount.Username,
     id: currentAccount.Id,
     socketID: socket.id,
+    sendingTime: getCurrentTime(),
   };
 
   function handleSendMessage() {
@@ -102,15 +164,45 @@ function Chatroom({ currentAccount, onBackArrowClick }) {
 
   return (
     <div className={styles.chatroom}>
-      <AvatarAndName onBackArrowClick={onBackArrowClick} />
+      <img
+        className={styles.backArrow}
+        src={backArrow}
+        alt="back-arrow"
+        onClick={onBackArrowClick}
+      />
+      <div className={styles.OtherAvatarName}>
+        {userAccounts
+          .filter((account) => account.Id !== currentAccount.Id)
+          .map((account) => (
+            <AvatarAndName
+              key={account.Id}
+              onBackArrowClick={onBackArrowClick}
+              otherAvatar={account.Info.avatar}
+              otherUsername={account.Username}
+            />
+          ))}{" "}
+      </div>
+
       <div className={styles.chatArea}>
-        {messageBase.map((messages, index) =>
-          messages.username === currentAccount.Username ? (
-            <SelfMessage key={index} postNewMessage={messages.text} />
+        {messageBase.map((messages, index) => {
+          const senderAccount = userAccounts.find(
+            (account) => account.Id === messages.id
+          );
+          return messages.id === currentAccount.Id ? (
+            <SelfMessage
+              key={index}
+              postNewMessage={messages.text}
+              sendingTime={messages.sendingTime}
+            />
           ) : (
-            <FriendMessage key={index} postNewMessage={messages.text} />
-          )
-        )}
+            <FriendMessage
+              key={index}
+              postNewMessage={messages.text}
+              sendingTime={messages.sendingTime}
+              userAvatar={senderAccount.Info.avatar}
+            />
+          );
+        })}
       </div>
       <LaunchArea
         newMessage={newMessage}
@@ -122,53 +214,31 @@ function Chatroom({ currentAccount, onBackArrowClick }) {
   );
 }
 
-// FriendList related components
-function InfoCard({ user }) {
-  return (
-    <>
-      <div className={styles.infoCard}>
-        <div className={styles.info}>{user.Username}</div>
-        <div className={styles.aboutMe}>{user.Info.aboutMe}</div>
-        <div className={styles.pickedTags}>
-          {user.Info.citySelected}
-          {user.Info.cuisineSelected}
-        </div>
-      </div>
-    </>
-  );
-}
-
 // Chatroom related components
-function AvatarAndName({ onBackArrowClick }) {
+function AvatarAndName({ otherAvatar, otherUsername }) {
   return (
     <div className={styles.avatarAndName}>
-      <img
-        className={styles.backArrow}
-        src={backArrow}
-        alt="back-arrow"
-        onClick={onBackArrowClick}
-      />
-      <img className={styles.avatar} src={iconChatCat} alt="avatar" />
-      <span className={styles.name}>Anna</span>
+      <img className={styles.avatar} src={otherAvatar} alt="avatar" />
+      <span className={styles.name}>{otherUsername}</span>
     </div>
   );
 }
 
-function SelfMessage({ postNewMessage }) {
+function SelfMessage({ postNewMessage, sendingTime }) {
   return (
     <div className={styles.selfMessage}>
       <div className={styles.message}>{postNewMessage}</div>
-      <div className={styles.sentTime}>7:07PM</div>
+      <div className={styles.sendingTime}>{sendingTime}</div>
     </div>
   );
 }
-function FriendMessage({ postNewMessage }) {
+function FriendMessage({ postNewMessage, sendingTime, userAvatar }) {
   return (
     <div className={styles.friendMessage}>
-      <img className={styles.avatar} src={iconChatCat} alt="avatar" />
+      <img className={styles.avatar} src={userAvatar} alt="avatar" />
       <div className={styles.messageAndTime}>
         <div className={styles.message}>{postNewMessage}</div>
-        <div className={styles.sentTime}>8:08PM</div>
+        <div className={styles.sendingTime}>{sendingTime}</div>
       </div>
     </div>
   );

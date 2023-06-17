@@ -51,8 +51,8 @@ function App() {
 
     if (findMeetPasswordAccount.length !== 0) {
       setCurrentAccount(findMeetPasswordAccount[0]);
-      setSelectedCity(currentAccount.Info.citySelected);
-      setSelectedCuisine(currentAccount.Info.cuisineSelected);
+      setSelectedCity(findMeetPasswordAccount[0].Info.citySelected);
+      setSelectedCuisine(findMeetPasswordAccount[0].Info.cuisineSelected);
       console.log(
         "Login Success, Welcome",
         findMeetPasswordAccount[0].Username
@@ -96,7 +96,13 @@ function App() {
             setSelectedCuisine={setSelectedCuisine}
           />
         )}
-        {page === "chatPage" && <ChatPage onChangePage={handleToMainPage} />}
+        {page === "chatPage" && (
+          <ChatPage
+            onChangePage={handleToMainPage}
+            currentAccount={currentAccount}
+              selectedCuisine={selectedCuisine}
+          />
+        )}
       </div>
     </UserContext.Provider>
   );
