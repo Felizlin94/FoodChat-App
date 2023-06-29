@@ -1,6 +1,6 @@
 # FoodChat-App
 
-## 使用方法
+## Client side
 1.打開終端機Terminal；
 
 2.輸入指令以下載本專案：
@@ -23,8 +23,8 @@
 
 ##### `http://localhost:3000`
 
-----------------------------------------
 
+## Server side
 開啟server，以享受websocket即時傳輸：
 
 1.打開另一個終端機Terminal；
@@ -41,4 +41,4 @@
 
 `node server`
 
-此時應用程式可以順利運作
+此時應用程式可以完整運作
