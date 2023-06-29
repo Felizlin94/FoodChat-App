@@ -33,12 +33,12 @@
 
 `cd FoodChat-App`
 
-3. 進入server所在位置：
+3.進入server所在位置：
 
 `cd src`
 
-4. 開啟server：
+4.開啟server：
 
 `node server`
 
-此時應用程式可以完整運作
+此時應用程式可以完整運作。
